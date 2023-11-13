@@ -1,4 +1,3 @@
-```markdown
 # Image Degradation Script
 
 A Python script for degrading images with various effects such as Gaussian noise, blur, and pixelation.
@@ -9,7 +8,6 @@ A Python script for degrading images with various effects such as Gaussian noise
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Introduction
@@ -65,4 +63,3 @@ This project is licensed under the [MIT License](LICENSE).
 ## Contact
 
 For questions or feedback, feel free to reach out to [RBianic](mailto:public@fkgm.fr).
-```
