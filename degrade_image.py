@@ -16,6 +16,18 @@ def apply_blur(image, degradation_level):
     kernel_size = degradation_level if degradation_level % 2 == 1 else degradation_level + 1
     return cv2.GaussianBlur(image, (kernel_size, kernel_size), 0)
 
+def apply_pixelation(image, degradation_level):
+    # Determine the size of each pixel block
+    block_size = degradation_level
+
+    # Resize the image to a smaller size
+    small_image = cv2.resize(image, (image.shape[1] // block_size, image.shape[0] // block_size), interpolation=cv2.INTER_NEAREST)
+
+    # Resize the small image back to the original size
+    pixelated_image = cv2.resize(small_image, (image.shape[1], image.shape[0]), interpolation=cv2.INTER_NEAREST)
+
+    return pixelated_image
+
 def degrade_image(image_path, degradation_level, degradation_type):
     try:
         # Load the image
@@ -28,8 +40,10 @@ def degrade_image(image_path, degradation_level, degradation_type):
             degraded_img = apply_gaussian_noise(img, degradation_level)
         elif degradation_type == "blur":
             degraded_img = apply_blur(img, degradation_level)
+        elif degradation_type == "pixelate":
+            degraded_img = apply_pixelation(img, degradation_level)
         else:
-            raise ValueError("Unsupported degradation type. Use 'gaussian' or 'blur'.")
+            raise ValueError("Unsupported degradation type. Use 'gaussian', 'blur', or 'pixelate'.")
 
         # Save the degraded image
         cv2.imwrite('degraded_image.jpg', degraded_img)
